@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[oc]
+.venv/
+
+# The fork's source and build logs (00-setup/build-server.sh)
+.build/
+
+# Downloaded datasets and models
+data/
+models/
+
+# script results
+results/
