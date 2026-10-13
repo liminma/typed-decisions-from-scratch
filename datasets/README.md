@@ -24,7 +24,7 @@ The taxonomies and splits here are derived from these datasets. If you reuse the
 
 ## The files
 
-**Row IDs** name a row of the original files, counting from 0. `b77-test-12` is row 12 of BANKING77's `test.csv`, not counting the header. `clinc-validation-40` is row 40 of CLINC150's validation split, in the `plus` version (`data_oos_plus.json`), with the in-scope rows first and the out-of-scope ones after them.
+**Row IDs** name a row of the original files by its position, starting at 0 with the first row after the header. `b77-test-0` is the first message in BANKING77's `test.csv`, and `b77-test-11` is the 12th. `clinc-validation-40` is the 41st message of CLINC150's validation split in the `plus` version (`data_oos_plus.json`), with the in-scope rows first and the out-of-scope ones after them.
 
 **`taxonomy.json`**:
 
@@ -56,7 +56,7 @@ The taxonomies and splits here are derived from these datasets. If you reuse the
 
 **BANKING77 groups.** BANKING77 has no groups of its own, and 77 intents are too many to list behind single letters, so the series sorts them into 8 groups of at most 14. The groups were drafted, then reviewed against the training rows. The review moved six intents, so that intents easily confused with each other end up in the same group, where the model chooses between them side by side. `get_physical_card` (in practice, about the card's PIN) and `declined_card_payment` moved to the card problems group, renamed `CARD_PROBLEMS_AND_PIN`. `apple_pay_or_google_pay`, `supported_cards_and_currencies` and `transfer_into_account` moved to `TOP_UP`, and `country_support` to `ACCOUNT_AND_IDENTITY`.
 
-**BANKING77 descriptions.** One line per intent, written by reading training rows that are in neither split. Some describe how the dataset actually uses an intent rather than what its name says. For example, `get_physical_card` is "the PIN for a physical card: where to find it or it has not arrived", and `apple_pay_or_google_pay` is "using Apple Pay or Google Pay, mostly to top up".
+**BANKING77 descriptions.** One line per intent, written by reading training messages that aren't in `calib` (see **Splits** below). Some describe how the dataset actually uses an intent rather than what its name says. For example, `get_physical_card` is "the PIN for a physical card: where to find it or it has not arrived", and `apple_pay_or_google_pay` is "using Apple Pay or Google Pay, mostly to top up".
 
 **CLINC150 groups.** The 10 domains that come with the dataset ([`domains.json`](https://github.com/clinc/oos-eval/blob/master/data/domains.json)), in that file's order with intents sorted, plus `OUT_OF_SCOPE` with the single intent `oos`. There are no intent descriptions; CLINC150's intent names are clear enough on their own.
 
