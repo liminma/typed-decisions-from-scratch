@@ -1,6 +1,6 @@
 """Classify a whole split and count valid answers, with or without the grammar.
 
-    python 02-forcing-a-valid-answer/run.py                         # BANKING77 test, with the grammar (~16 min)
+    python 02-forcing-a-valid-answer/run.py                         # BANKING77 test, with the grammar (~12 min)
     python 02-forcing-a-valid-answer/run.py --split calib --limit 200 --no-grammar
     python 02-forcing-a-valid-answer/run.py --dataset clinc150
 

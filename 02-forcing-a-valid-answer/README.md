@@ -91,11 +91,11 @@ The retry is about length. A code is normally two tokens, but the model may also
 
 ### 4. A whole split
 
+`run.py` classifies every message of a split, one at a time. On a Dell Pro Max with GB10, the BANKING77 test set gives:
+
 ```bash
 python3 02-forcing-a-valid-answer/run.py  # BANKING77 test, ~12 min
 ```
-
-On a Dell Pro Max with GB10, the BANKING77 test set gives:
 
 ```
 banking77 test, with the grammar: 3080 messages in 715 s
@@ -105,5 +105,20 @@ banking77 test, with the grammar: 3080 messages in 715 s
 ```
 
 Every answer is a valid code, and none of them needed the retry. Running it again can give a slightly different count: a message whose top two options are nearly tied (0.412 against 0.405, say) can tip either way between runs, because the GPU's arithmetic isn't exactly the same every time.
+
+Without the grammar, on the first 200 messages of the `calib` split:
+
+```bash
+python3 02-forcing-a-valid-answer/run.py --split calib --limit 200 --no-grammar
+```
+
+```
+banking77 calib, without the grammar: 200 messages in 55 s
+  valid codes:  200 (100.0%)
+  retried:      0
+  correct:      177 (88.5%)
+```
+
+On ordinary messages like these, the model gives a valid code even without the grammar. (`retried` is always 0 here, since only requests with the grammar are retried.)
 
 Answers are saved in `results/` in this folder.
