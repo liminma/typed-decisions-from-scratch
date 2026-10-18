@@ -22,7 +22,7 @@ The image is built from source on your machine, with the fork's own Dockerfile a
 | `00-setup/` | Build the server image, download the model, start `llama-server` |
 | `datasets/` | BANKING77 and CLINC150: label groups, descriptions, fixed splits; how to make your own |
 | `01-why-typed-decisions/` | Why typed decisions? |
-| `02-forcing-a-valid-answer/` | Forcing a valid answer: grammars and single-token labels |
+| `02-forcing-a-valid-answer/` | Forcing a valid answer: grammars and one-letter choices |
 | `03-where-confidence-comes-from/` | Where confidence comes from: logprobs |
 | `04-is-the-confidence-honest/` | Is the confidence honest? Reliability plots and ECE |
 | `05-temperature-scaling/` | Fixing it: temperature scaling |
