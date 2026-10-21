@@ -4,9 +4,10 @@ For each token it generates, llama-server can return the most likely candidates 
 with their log-probabilities (`logprobs: true`, `top_logprobs: N`). Three things to know:
 
 - They are taken BEFORE the grammar and before sampling: the list holds what the model wanted to
-  write, including tokens the grammar would never allow ("The", " A", end of text). So we keep
-  the candidates that are valid letters at that point and renormalize over them. What's left out
-  is the "off-label" mass, worth recording: when it's large, the model wanted to say something else.
+  write, including tokens the grammar would never allow ("The", " A", the end-of-sequence
+  token). So we keep the candidates that are valid letters at that point and renormalize over
+  them. What's left out is the "off-label" mass, worth recording: when it's large, the model
+  wanted to say something else.
 - A code has two choices, so there are two distributions: P(group) at the first letter, and
   P(intent | group) at the second, given the group the model picked.
 - The confidence of the answer is their product: P(group) x P(intent | group).
@@ -21,7 +22,7 @@ import math
 from prompt import Prompt
 from server import chat
 
-TOP_LOGPROBS = 30  # enough to cover every letter at both steps (8 groups, up to 15 intents)
+TOP_LOGPROBS = 30  # enough to cover every letter at both steps (8 groups, up to 14 intents)
 
 
 def classify(prompt: Prompt, text: str) -> dict:
@@ -45,7 +46,8 @@ def read_probs(prompt: Prompt, answer: str, tokens: list[dict]) -> dict:
 
     A candidate counts for a letter if the text so far plus that candidate starts a valid code
     with that letter: at the first step "C" counts for group C; at the second, "-F" counts for
-    intent F (only the chosen group's intents). If the model spelled the code in three tokens,
+    intent F (only the chosen group's intents, and only if the candidate ends the code: after
+    "A-", "AB" doesn't count for intent A). If the model spelled the code in three tokens,
     the intent is read at the third token instead, where "F" itself is the candidate.
     """
     g = answer[0]
@@ -56,7 +58,7 @@ def read_probs(prompt: Prompt, answer: str, tokens: list[dict]) -> dict:
         return s[0] if s and s[0] in group_letters and (len(s) == 1 or s[1] == "-") else None
 
     def intent_of(s):
-        return s[2] if len(s) >= 3 and s[:2] == g + "-" and s[2] in intent_letters else None
+        return s[2] if len(s) == 3 and s[:2] == g + "-" and s[2] in intent_letters else None
 
     text, steps = "", {}
     for token in tokens:
