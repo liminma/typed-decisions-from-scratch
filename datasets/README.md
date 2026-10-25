@@ -3,7 +3,7 @@
 The series uses two public intent datasets:
 
 - **[BANKING77](https://github.com/PolyAI-LDN/task-specific-datasets):** the running example in posts 1–8. It has 77 intents from a bank's customer support, and many of them overlap, so the model makes mistakes worth calibrating.
-- **[CLINC150](https://github.com/clinc/oos-eval):** joins in posts 7–8. It has 150 intents from a virtual assistant, plus requests that match none of them ("out of scope").
+- **[CLINC150](https://github.com/clinc/oos-eval):** used in posts 5, 7 and 8. It has 150 intents from a virtual assistant, plus requests that match none of them ("out of scope").
 
 This folder holds no messages, only what the series adds on top of the data: the labels arranged into groups, and which rows go where. The posts' scripts download the data itself into `data/` at the repo root (ignored by git), from pinned commits, and check its SHA-256.
 
@@ -69,8 +69,8 @@ The taxonomies and splits here are derived from these datasets. If you reuse the
 To check the shipped files against the data:
 
 ```bash
-python datasets/make_splits.py banking77
-python datasets/make_splits.py clinc150
+python3 datasets/make_splits.py banking77
+python3 datasets/make_splits.py clinc150
 ```
 
 ## Making your own
@@ -88,7 +88,7 @@ To run the series on your own labelled messages:
 3. **Make the splits:**
 
    ```bash
-   python datasets/make_splits.py csv my_data.csv datasets/my_data/taxonomy.json \
+   python3 datasets/make_splits.py csv my_data.csv datasets/my_data/taxonomy.json \
        --calib 10 --test 60 --shots 5 > datasets/my_data/splits.json
    ```
 

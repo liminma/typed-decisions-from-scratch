@@ -5,9 +5,9 @@ A split file lists row IDs only, never text:
 calib is for fitting calibration and thresholds, test is for reporting, and shots are the
 example messages the prompt shows for each intent (taken from rows in neither split).
 
-    python datasets/make_splits.py banking77     # rebuild and compare with datasets/banking77/splits.json
-    python datasets/make_splits.py clinc150
-    python datasets/make_splits.py csv my.csv datasets/my/taxonomy.json --calib 10 --test 60 > datasets/my/splits.json
+    python3 datasets/make_splits.py banking77     # rebuild and compare with datasets/banking77/splits.json
+    python3 datasets/make_splits.py clinc150
+    python3 datasets/make_splits.py csv my.csv datasets/my/taxonomy.json --calib 10 --test 60 > datasets/my/splits.json
 
 Standard library only. Downloads go to data/ at the repo root (ignored by git).
 """
