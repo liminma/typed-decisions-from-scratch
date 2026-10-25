@@ -28,7 +28,7 @@ EPS = 1e-6  # a letter missing from top_logprobs gets this probability rather th
 def scale(probs: dict[str, float], letters: list[str], t: float) -> dict[str, float]:
     """probs over `letters`, rescaled by temperature t and renormalized."""
     logs = {k: math.log(max(probs.get(k, 0.0), EPS)) / t for k in letters}
-    top = max(logs.values())  # subtract the largest before exp(), so nothing overflows
+    top = max(logs.values())  # subtract the largest before exp(), so the total can't underflow to 0
     weights = {k: math.exp(v - top) for k, v in logs.items()}
     total = sum(weights.values())
     return {k: w / total for k, w in weights.items()}

@@ -25,7 +25,7 @@ The image is built from source on your machine, with the fork's own Dockerfile a
 | `02-forcing-a-valid-answer/` | Forcing a valid answer: grammars and one-letter choices |
 | `03-where-confidence-comes-from/` | Where confidence comes from: logprobs |
 | `04-is-the-confidence-honest/` | Is the confidence honest? Reliability plots and ECE |
-| `05-temperature-scaling/` | Fixing it: temperature scaling |
+| `05-temperature-scaling/` | Fixing the confidence: temperature scaling |
 | `06-isotonic-regression/` | When one knob isn't enough: isotonic regression |
 | `07-accuracy-coverage-and-auroc/` | Does confidence separate right from wrong? |
 | `08-from-confidence-to-action/` | From confidence to action: thresholds and routing |

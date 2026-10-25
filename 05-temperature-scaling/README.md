@@ -1,6 +1,6 @@
-# 05 - Fixing it: temperature scaling
+# 05 - Fixing the confidence: temperature scaling
 
-Code for Post 5: Fixing it: temperature scaling
+Code for Post 5: Fixing the confidence: temperature scaling
 
 Correcting the model's confidence with one number per step, fitted on the calibration answers and checked on the test answers.
 
@@ -83,7 +83,7 @@ test       3080     86.9%           0.832   0.845   0.0409  0.0301
 uv run 05-temperature-scaling/plot.py
 ```
 
-The diagram shows the scaled points closer to the diagonal, but not on it. Each T is a single dial: it sharpens or flattens its step's probabilities everywhere at once. It can't make the model more sure in one range and less sure in another. So the honest claim is "as close to the accuracy as one number allows", not "equal to the accuracy". Post 6 lifts that limit.
+The diagram shows the scaled points closer to the diagonal, but not on it. Each T is a single knob: it sharpens or flattens its step's probabilities everywhere at once. It can't make the model more sure in one range and less sure in another. So the honest claim is "as close to the accuracy as one number allows", not "equal to the accuracy". Post 6 lifts that limit.
 
 ## 4. The fit on CLINC150
 
