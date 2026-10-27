@@ -83,7 +83,7 @@ test       3080     86.9%           0.832   0.845   0.0409  0.0301
 uv run 05-temperature-scaling/plot.py
 ```
 
-The diagram shows the scaled points closer to the diagonal, but not on it. Each T is a single knob: it sharpens or flattens its step's probabilities everywhere at once. It can't make the model more sure in one range and less sure in another. So the honest claim is "as close to the accuracy as one number allows", not "equal to the accuracy". Post 6 lifts that limit.
+The diagram shows the scaled points closer to the diagonal, but not on it. Each T is a single knob: it sharpens or flattens its step's whole distribution by the same rule, whatever the confidence. It can't lift the confidence a lot around 0.6 and leave it alone around 0.95. So temperature scaling gets the confidence only as close to the accuracy as one number per step allows. Post 6 lifts that limit.
 
 ## 4. The fit on CLINC150
 
@@ -101,4 +101,4 @@ calib       850     96.2%           0.859   0.959   0.1036  0.0147
 test       5500     94.8%           0.860   0.956   0.0885  0.0113
 ```
 
-The model is far more modest here: right 94.8% of the time with a mean confidence of 0.86. Both steps get sharpened, and ECE on the test set drops from 0.089 to 0.011. The temperatures differ between the two datasets, even in direction, so each task needs its own fit on its own labelled answers.
+The model is far more modest here: right 94.8% of the time with a mean confidence of 0.86. Both steps get sharpened, and ECE on the test set drops from 0.089 to 0.011. The temperatures differ between the two datasets, even in direction, so each dataset needs its own fit on its own labelled answers.
